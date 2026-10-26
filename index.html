@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M&H Soulmates</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(145deg, #100912, #260f25, #09090e);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .app {
+      width: 100%;
+      max-width: 430px;
+      background: #17121c;
+      border: 1px solid #593047;
+      border-radius: 24px;
+      padding: 25px;
+      box-shadow: 0 15px 50px #0008;
+    }
+    .heart {
+      text-align: center;
+      color: #ff76ad;
+      font-size: 38px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 27px;
+      margin: 8px 0;
+    }
+    .subtitle {
+      text-align: center;
+      color: #c5afc4;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+    h2 { font-size: 17px; }
+    input, textarea, button {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: 1px solid #493044;
+      margin: 7px 0;
+      font-size: 15px;
+    }
+    input, textarea {
+      background: #0e0b12;
+      color: white;
+    }
+    button {
+      background: #f36ba5;
+      color: #1b0c16;
+      border: 0;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .secondary {
+      background: #332033;
+      color: white;
+      border: 1px solid #62405a;
+    }
+    #chat {
+      display: none;
+      margin-top: 22px;
+      border-top: 1px solid #493044;
+      padding-top: 12px;
+    }
+    #messages {
+      height: 190px;
+      overflow-y: auto;
+      padding: 10px;
+      background: #0e0b12;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .message {
+      background: #422039;
+      padding: 10px;
+      margin: 7px 0;
+      border-radius: 12px;
+      overflow-wrap: anywhere;
+    }
+    .note {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #b9a9ba;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="heart">♥</div>
+    <h1>M&H Soulmates</h1>
+    <p class="subtitle">A little private space for two.</p>
+
+    <h2>Your name</h2>
+    <input id="nickname" maxlength="30" placeholder="Enter your name">
+
+    <h2>Your private code</h2>
+    <input id="roomCode" maxlength="40" placeholder="Create or enter a shared code">
+
+    <button onclick="enterRoom()">Enter our space</button>
+
+    <section id="chat">
+      <h2 id="welcome">Our private space ♥</h2>
+      <div id="messages"></div>
+      <textarea id="messageInput" rows="3" maxlength="1000"
+        placeholder="Write a message..."></textarea>
+      <button onclick="sendMessage()">Send message</button>
+      <button class="secondary" onclick="leaveRoom()">Leave space</button>
+    </section>
+
+    <p class="note">
+      First preview only: messages stay in this browser and are not yet
+      shared with another person. We still need to connect the database
+      before using this as a real private chat.
+    </p>
+  </main>
+
+  <script>
+    let currentName = "";
+    let currentRoom = "";
+
+    function enterRoom() {
+      const name = document.getElementById("nickname").value.trim();
+      const code = document.getElementById("roomCode").value.trim();
+
+      if (!name || !code) {
+        alert("Please enter your name and your shared code.");
+        return;
+      }
+
+      currentName = name;
+      currentRoom = code;
+
+      document.getElementById("chat").style.display = "block";
+      document.getElementById("welcome").textContent =
+        "Your space, " + currentName + " ♥";
+
+      showMessages();
+    }
+
+    function getMessages() {
+      try {
+        return JSON.parse(
+          localStorage.getItem("mh_messages_" + currentRoom) || "[]"
+        );
+      } catch {
+        return [];
+      }
+    }
+
+    function showMessages() {
+      const box = document.getElementById("messages");
+      box.replaceChildren();
+
+      getMessages().forEach(item => {
+        const message = document.createElement("div");
+        message.className = "message";
+        message.textContent = item.name + ": " + item.text;
+        box.appendChild(message);
+      });
+
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("messageInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      const messages = getMessages();
+      messages.push({ name: currentName, text: text });
+      localStorage.setItem(
+        "mh_messages_" + currentRoom,
+        JSON.stringify(messages)
+      );
+
+      input.value = "";
+      showMessages();
+    }
+
+    function leaveRoom() {
+      document.getElementById("chat").style.display = "none";
+      currentName = "";
+      currentRoom = "";
+    }
+  </script>
+</body>
+</html>
