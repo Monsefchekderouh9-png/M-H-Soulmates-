@@ -3,334 +3,301 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#090909">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100b12">
 <title>M&H Soulmates</title>
 <style>
-:root{--g:#d8b56a;--gl:#f3dda5;--bg:#090909;--p:#15130f;--line:#4a381c;--m:#aaa397;--w:#f8f3e8}
+:root{--bg:#100b12;--panel:#1a131c;--pink:#ff86ad;--text:#fff4f8;--muted:#b6a4b2;--line:#392738}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top,#2a2011,#090909 55%);color:var(--w);font:14px Arial,sans-serif;min-height:100vh}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 -apple-system,sans-serif;min-height:100vh}
 button,input,textarea{font:inherit}
-button{cursor:pointer}
-.hide{display:none!important}
-.top{position:sticky;top:0;z-index:4;display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:#090909ed;border-bottom:1px solid #3d2e18}
-.logo{font:25px Georgia,serif;color:var(--gl);letter-spacing:1px}
-.logo small{display:block;text-align:center;font:italic 10px Georgia;letter-spacing:3px}
-.muted,.small{color:var(--m);line-height:1.6}
-.muted{font-size:13px}.small{font-size:11px}
-main{width:min(100% - 28px,700px);margin:22px auto 90px}
-.hero{text-align:center;padding:32px 8px 22px}
-.heart{font-size:30px;color:var(--g)}
-h1{font:normal clamp(42px,11vw,58px)/1 Georgia,serif;color:var(--gl);margin:12px 0 4px}
-.script{font:italic 30px Georgia;color:var(--g)}
-.panel{padding:20px;margin:14px 0;background:linear-gradient(145deg,#1b1915,#101010);border:1px solid var(--line);border-radius:20px;box-shadow:0 14px 45px #0007}
-.title{font:normal 23px Georgia;color:var(--gl);margin:0 0 10px}
-.field{margin:13px 0}
-.field label{display:block;font-size:12px;color:#d9c9a7;margin-bottom:7px}
-.field input,.field textarea{width:100%;background:#0b0b0b;color:white;border:1px solid #4a3b25;border-radius:11px;padding:13px;outline:none}
-.btn{width:100%;border:1px solid var(--g);border-radius:11px;padding:13px;background:linear-gradient(100deg,#b98a3c,#f3d99b);color:#181108;font-weight:bold;margin-top:8px}
-.btn.alt{background:transparent;color:var(--gl)}
-.btn.mini{width:auto;padding:9px 12px;margin:0}
-.tabs{display:flex;gap:8px;margin:10px 0 18px}
-.tabs button{flex:1;padding:11px;border:1px solid #3f3320;border-radius:10px;background:#111;color:#c9b98e}
-.tabs .on{background:#3a2b15;color:#ffe3a0;border-color:var(--g)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.tile{min-height:105px;text-align:left;padding:15px 12px;border-radius:15px;border:1px solid #40321f;background:linear-gradient(145deg,#1b1812,#0d0d0d);color:var(--w)}
-.ico{display:block;color:var(--g);font-size:23px;margin-bottom:10px}
-.tile strong{display:block;color:var(--gl);font:normal 17px Georgia}
-.tile span:last-child{display:block;color:var(--m);font-size:11px;margin-top:5px;line-height:1.4}
-.day{text-align:center;border:1px solid #705224;background:linear-gradient(135deg,#251b0d,#100f0c);border-radius:16px;padding:18px}
-.num{font:52px Georgia;color:var(--gl)}
-.chatlist{display:flex;flex-direction:column;gap:9px;max-height:42vh;overflow:auto;margin:15px 0}
-.bubble{max-width:88%;align-self:flex-start;padding:10px 12px;border:1px solid #4b3b23;border-radius:14px 14px 14px 4px;background:#201c15;overflow-wrap:anywhere}
-.bubble small{display:block;color:#c5b38b;font-size:10px;margin-bottom:4px}
-.bubble.mine{align-self:flex-end;background:#4a3518;border-radius:14px 14px 4px 14px}
-.composer{display:flex;gap:8px;align-items:end}
-.composer textarea{flex:1;min-width:0;background:#090909;color:white;border:1px solid var(--line);border-radius:12px;padding:12px}
-.send{height:45px;width:48px;background:var(--g);border:0;border-radius:12px}
-.photos{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.photo{border:1px solid #40321f;border-radius:12px;overflow:hidden}
-.photo img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
-.photo p{padding:0 10px;font-size:12px}
-.note{padding:13px;margin:9px 0;background:#100f0c;border:1px solid var(--line);border-radius:12px}
-.nav{position:fixed;bottom:0;left:0;right:0;z-index:5;display:flex;justify-content:space-around;background:#090909f5;border-top:1px solid #3d2d17;padding:9px 4px max(9px,env(safe-area-inset-bottom))}
-.nav button{border:0;background:none;color:#a99a78;font-size:10px}
-.nav b{display:block;font-size:20px;font-weight:normal;margin-bottom:3px}
-.nav button.active{color:var(--gl)}
-.status{font-size:12px;color:var(--gl);line-height:1.5}
-.foot{text-align:center;color:#806a42;font:10px Georgia;letter-spacing:2px;padding:22px}
-@media(min-width:560px){.grid,.photos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+button{cursor:pointer;color:inherit}
+.hidden{display:none!important}
+.app{max-width:900px;margin:auto;padding:12px;min-height:100vh}
+.shell{background:#171119;border:1px solid var(--line);border-radius:22px;overflow:hidden;min-height:calc(100vh - 24px)}
+header{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px}
+.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#ffd0df,#f45b91);display:grid;place-items:center;color:#35101f;font-size:25px}
+.brand strong{display:block}
+.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:2px}
+.pill{font-size:10px;color:#f4c7d9;border:1px solid #513044;border-radius:999px;padding:6px 9px}
+main{padding:17px}
+.screen{display:none}
+.screen.active{display:block}
+.hero{padding:25px 20px;border:1px solid #583047;border-radius:18px;background:linear-gradient(120deg,#3b1b30,#211520);margin-bottom:14px}
+.eyebrow{color:var(--pink);font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase}
+.hero h1{font:normal clamp(34px,8vw,48px)/1.08 Georgia,serif;margin:10px 0}
+.muted{color:var(--muted);font-size:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:13px}
+.card h2{font:normal 23px Georgia;color:#ffd2e1;margin:0 0 8px}
+.field{margin:12px 0}
+.field label{display:block;font-size:12px;margin-bottom:6px}
+.field input{width:100%;background:#110d13;color:var(--text);border:1px solid #483347;border-radius:11px;padding:12px}
+.btn{width:100%;border:0;border-radius:11px;padding:12px;background:linear-gradient(135deg,#ffaac6,#f45b91);color:#35101f;font-weight:800;margin-top:8px}
+.btn.alt{background:#281c2a;border:1px solid var(--line);color:#ffd2e1}
+.btn.small{width:auto;margin:0;padding:8px 11px;font-size:11px}
+.tabs{display:flex;gap:7px;margin:12px 0 17px}
+.tabs button{flex:1;padding:10px;border:1px solid var(--line);border-radius:10px;background:#110d13;color:var(--muted)}
+.tabs button.active{background:#321d2c;color:var(--pink)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.tile{min-height:86px;text-align:left;padding:13px;border-radius:13px;border:1px solid var(--line);background:#201722}
+.tile b{display:block;color:var(--pink);font-size:20px}
+.tile strong{display:block;font-size:12px;margin-top:5px}
+.tile small{color:var(--muted);font-size:10px}
+.nav{display:flex;gap:5px;overflow:auto;padding:9px;border-bottom:1px solid var(--line)}
+.messages{display:flex;flex-direction:column;gap:9px;max-height:48vh;overflow:auto;margin:14px 0}
+.bubble{max-width:88%;padding:10px 12px;border:1px solid #483347;border-radius:14px;background:#2a202d;overflow-wrap:anywhere;font-size:13px}
+.bubble.mine{align-self:flex-end;background:#71304e}
+.bubble small{display:block;color:#e5bfd0;font-size:9px;margin-bottom:4px}
+.compose{display:flex;gap:8px}
+.compose textarea{flex:1;min-width:0;background:#110d13;color:white;border:1px solid #483347;border-radius:11px;padding:11px}
+.send{width:48px;border:0;border-radius:11px;background:var(--pink);color:#35101f}
+.status{font-size:12px;color:#ffc0d5;min-height:17px;overflow-wrap:anywhere;margin:10px 0}
+.notice{font-size:10px;color:#a994a4;margin-top:12px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.code{font:bold 19px monospace;letter-spacing:2px;color:#ffd2e1;overflow-wrap:anywhere}
+.footer{text-align:center;color:#806d7d;font-size:10px;padding:15px}
+@media(min-width:650px){main{padding:22px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
-<header class="top">
-<div class="logo">♡ M & H<small>SOULMATES</small></div>
-<div class="small" id="headStatus">A LITTLE WORLD FOR TWO</div>
+<div class="app"><div class="shell">
+<header>
+<div class="brand"><div class="logo">♡</div><div><strong>M&amp;H Soulmates</strong><small>OUR LITTLE UNIVERSE</small></div></div>
+<div class="pill" id="headStatus">PRIVATE SPACE</div>
 </header>
 <main>
-<section id="welcome">
-<div class="hero">
-<div class="heart">♕ ♡</div>
-<h1>M&H</h1><div class="script">Soulmates</div>
-<p class="muted">Two hearts · One story</p>
-<div style="color:#b38b46;margin:20px">───── ♡ ─────</div>
-</div>
-<div class="panel">
-<h2 class="title">Your own little world</h2>
-<p class="muted">A private space for conversations, voice notes, photos and the moments you want to keep.</p>
-<button class="btn" onclick="go('intro')">Discover our space →</button>
-</div>
-<div class="foot">MADE WITH CARE · M&H</div>
+<section id="welcome" class="screen active">
+<div class="hero"><div class="eyebrow">A little world for two</div><h1>Only us,<br>in our own world. ♡</h1><p class="muted">A private place for your conversations and memories.</p></div>
+<div class="card"><h2>Your own little universe</h2><p class="muted">Sign in to create your shared homepage or join with a private invitation code.</p><button class="btn" id="startBtn">Enter our space →</button></div>
 </section>
 
-<section id="intro" class="hide">
-<div class="hero">
-<div class="heart">✦</div>
-<h1 style="font-size:42px">A story made<br>of little moments</h1>
-<p class="muted">Keep the memories. Save the words. Celebrate your story.</p>
-</div>
-<div class="panel">
-<div class="grid">
-<div class="tile"><b class="ico">☏</b><strong>Our chat</strong><span>Messages together</span></div>
-<div class="tile"><b class="ico">♫</b><strong>Voice notes</strong><span>Keep a voice close</span></div>
-<div class="tile"><b class="ico">▧</b><strong>Memories</strong><span>Photos and moments</span></div>
-<div class="tile"><b class="ico">♡</b><strong>Our days</strong><span>Important dates</span></div>
-</div>
-<button class="btn" onclick="go('auth')">Enter our space →</button>
-</div>
-</section>
-
-<section id="auth" class="hide">
-<div class="hero"><div class="heart">♡</div><h1 style="font-size:40px">Welcome Back</h1><p class="muted">Sign in to your private space</p></div>
-<div class="panel">
-<div class="tabs"><button id="lt" class="on" onclick="mode('login')">Log in</button><button id="rt" onclick="mode('register')">Create account</button></div>
+<section id="auth" class="screen">
+<div class="hero"><div class="eyebrow">Private entrance</div><h1>Welcome back</h1><p class="muted">Your account keeps your space private.</p></div>
+<div class="card">
+<div class="tabs"><button id="loginTab" class="active" type="button">Log in</button><button id="registerTab" type="button">Create account</button></div>
 <form id="authForm">
-<div id="nf" class="field hide"><label>Display name</label><input id="name" maxlength="40" placeholder="Your name"></div>
-<div class="field"><label>Email</label><input id="email" type="email" required placeholder="you@example.com"></div>
-<div class="field"><label>Password</label><input id="pass" type="password" minlength="8" required placeholder="At least 8 characters"></div>
-<div id="cf" class="field hide"><label>Private invitation code</label><input id="code" placeholder="Long private code" autocomplete="off"></div>
-<button class="btn" id="submit" type="submit">Log in</button>
+<div class="field hidden" id="nameWrap"><label for="displayName">Your name</label><input id="displayName" maxlength="40" placeholder="Your name"></div>
+<div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="you@example.com"></div>
+<div class="field"><label for="password">Password</label><input id="password" type="password" minlength="8" required placeholder="At least 8 characters"></div>
+<button class="btn" id="authSubmit">Log in</button>
 </form>
-<p class="small">Real accounts and access protection must be connected and configured before using personal messages or photos.</p>
 <p id="authStatus" class="status"></p>
-<button class="btn alt" onclick="demo()">Explore design preview</button>
-<button class="btn alt" onclick="go('welcome')">← Back</button>
+<button class="btn alt" id="backWelcome">← Back</button>
+<p class="notice">Account confirmation may be required depending on your Supabase settings.</p>
 </div>
 </section>
 
-<section id="home" class="hide">
-<div class="panel" style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-<div><div class="small">WELCOME TO YOUR SPACE</div><h2 class="title" id="hello">Our little world ♡</h2><div class="muted" id="today"></div></div>
-<button class="btn alt mini" onclick="logout()">Log out</button>
-</div>
-<div class="day"><div class="small">EVERY DAY IS PART OF YOUR STORY</div><div class="num" id="days">♡</div><div style="font:18px Georgia;color:var(--gl)">Days together</div><p class="small">Set your special date in Our Story.</p></div>
-<div class="panel"><h2 class="title">Your space</h2><div class="grid">
-<button class="tile" onclick="go('chat')"><b class="ico">☏</b><strong>Our chat</strong><span>Messages together</span></button>
-<button class="tile" onclick="go('memories')"><b class="ico">▧</b><strong>Memories</strong><span>Photos and captions</span></button>
-<button class="tile" onclick="go('voice')"><b class="ico">♫</b><strong>Voice notes</strong><span>Record little messages</span></button>
-<button class="tile" onclick="go('story')"><b class="ico">♡</b><strong>Our story</strong><span>Dates and milestones</span></button>
-<button class="tile" onclick="go('letters')"><b class="ico">✉</b><strong>Letters</strong><span>Notes to keep</span></button>
-<button class="tile" onclick="go('profile')"><b class="ico">⚙</b><strong>Settings</strong><span>Profile and privacy</span></button>
+<section id="space" class="screen">
+<div class="hero"><div class="eyebrow">Your next step</div><h1>How would you like<br>to enter our world?</h1><p class="muted">Create a new shared homepage, or join one that already exists.</p></div>
+<div class="card"><h2>Create a new homepage</h2><div class="field"><label for="spaceName">Name your space</label><input id="spaceName" maxlength="60" value="M & H Soulmates"></div><button class="btn" id="createBtn">Create space & invitation code</button></div>
+<div class="card"><h2>Join a homepage</h2><div class="field"><label for="inviteCode">Invitation code</label><input id="inviteCode" maxlength="80" placeholder="Paste the code you received"></div><button class="btn alt" id="joinBtn">Join partner's space</button></div>
+<p id="spaceStatus" class="status"></p><button class="btn alt" id="logoutFromSpace">Log out</button>
+</section>
+
+<section id="home" class="screen">
+<div class="hero"><div class="eyebrow">A little place for us</div><h1>Our world, our memories. ♡</h1><p class="muted" id="welcomeText">Welcome to your shared space.</p></div>
+<div class="card"><div class="row"><h3>Our invitation code</h3><button class="btn small alt" id="copyCode">Copy</button></div><div class="code" id="inviteDisplay">—</div><p class="notice">Share this code only with the person you want to invite.</p></div>
+<div class="card"><h3>Our space</h3><div class="grid">
+<button class="tile" data-go="chat"><b>♡</b><strong>Private chat</strong><small>Messages shared between members</small></button>
+<button class="tile" data-go="memories"><b>▧</b><strong>Memories</strong><small>Photo storage will be connected next</small></button>
+<button class="tile" data-go="plans"><b>✧</b><strong>Plans & tasks</strong><small>Coming in the next connection step</small></button>
 </div></div>
+<button class="btn alt" id="logoutHome">Log out</button>
 </section>
 
-<section id="chat" class="hide"><div class="panel">
-<button class="btn alt mini" onclick="go('home')">← Home</button>
-<h2 class="title" style="margin-top:16px">Our chat</h2>
-<p class="muted">This is a local preview until shared database messaging is connected.</p>
-<div id="chatList" class="chatlist"></div>
-<div class="composer"><textarea id="msg" rows="2" maxlength="2000" placeholder="Write something kind..."></textarea><button class="send" onclick="send()">➤</button></div>
-<p id="chatStatus" class="status"></p>
-</div></section>
+<section id="chat" class="screen">
+<div class="card"><div class="row"><h2>Just between us ♡</h2><button class="btn small alt" data-go="home">Home</button></div>
+<div id="messages" class="messages"></div>
+<form id="messageForm" class="compose"><textarea id="messageInput" rows="2" maxlength="2000" placeholder="Write something kind…"></textarea><button class="send" aria-label="Send">➤</button></form>
+<p id="chatStatus" class="status"></p></div>
+</section>
 
-<section id="memories" class="hide"><div class="panel">
-<button class="btn alt mini" onclick="go('home')">← Home</button>
-<h2 class="title" style="margin-top:16px">Our memories</h2>
-<p class="muted">Add a photo and caption. Demo saves only on this device session.</p>
-<div class="field"><label>Choose photo</label><input id="photo" type="file" accept="image/*"></div>
-<div class="field"><label>Caption</label><input id="caption" maxlength="160" placeholder="Why this moment matters..."></div>
-<button class="btn" onclick="addPhoto()">Save memory</button>
-<p id="photoStatus" class="status"></p><div id="photoGrid" class="photos"></div>
-</div></section>
-
-<section id="voice" class="hide"><div class="panel">
-<button class="btn alt mini" onclick="go('home')">← Home</button>
-<h2 class="title" style="margin-top:16px">Voice notes</h2>
-<p class="muted">Record a short note if your browser supports microphone recording. Preview recordings stay on this device.</p>
-<button id="rec" class="btn" onclick="record()">● Start recording</button>
-<p id="recStatus" class="status"></p><div id="voiceList"></div>
-</div></section>
-
-<section id="story" class="hide"><div class="panel">
-<button class="btn alt mini" onclick="go('home')">← Home</button>
-<h2 class="title" style="margin-top:16px">Our story</h2>
-<div class="field"><label>Special date</label><input id="date" type="date"></div>
-<button class="btn" onclick="saveDate()">Save date</button><p id="dateStatus" class="status"></p>
-<div style="height:1px;background:#3c2d17;margin:18px 0"></div>
-<h3 style="font:normal 19px Georgia;color:var(--gl)">Milestones</h3>
-<div class="field"><label>Title</label><input id="milestone" maxlength="80" placeholder="Our first day out..."></div>
-<div class="field"><label>Date</label><input id="mileDate" type="date"></div>
-<button class="btn alt" onclick="addMilestone()">Add milestone</button><div id="mileList"></div>
-</div></section>
-
-<section id="letters" class="hide"><div class="panel">
-<button class="btn alt mini" onclick="go('home')">← Home</button>
-<h2 class="title" style="margin-top:16px">Letters & notes</h2>
-<div class="field"><label>Title</label><input id="ntitle" maxlength="80" placeholder="A little reminder"></div>
-<div class="field"><label>Your note</label><textarea id="ntext" rows="4" maxlength="3000" placeholder="Write a letter to keep..."></textarea></div>
-<div class="field"><label>Open on (optional)</label><input id="ndate" type="date"></div>
-<button class="btn" onclick="addNote()">Save note</button><div id="noteList"></div>
-</div></section>
-
-<section id="profile" class="hide"><div class="panel">
-<button class="btn alt mini" onclick="go('home')">← Home</button>
-<h2 class="title" style="margin-top:16px">Profile & privacy</h2>
-<p id="profileText" class="muted">Preview mode</p>
-<p class="small">Do not use this preview for private information. Proper database permissions and authentication still need to be configured.</p>
-<button class="btn alt" onclick="logout()">Log out</button>
-</div></section>
+<section id="memories" class="screen"><div class="card"><div class="row"><h2>Our memories</h2><button class="btn small alt" data-go="home">Home</button></div><p class="muted">The photo gallery will be connected to secure shared storage after the database storage setup.</p></div></section>
+<section id="plans" class="screen"><div class="card"><div class="row"><h2>Plans & little things</h2><button class="btn small alt" data-go="home">Home</button></div><p class="muted">Shared plans and tasks are the next feature to connect.</p></div></section>
 </main>
+<div class="footer">M&amp;H Soulmates · a small space for two ♡</div>
+</div></div>
 
-<nav id="nav" class="nav hide">
-<button onclick="go('home')"><b>⌂</b>Home</button>
-<button onclick="go('chat')"><b>☏</b>Chat</button>
-<button onclick="go('memories')"><b>▧</b>Memories</button>
-<button onclick="go('profile')"><b>♙</b>Profile</button>
-</nav>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-let authMode='login',demoUser='Guest',chat=[],photos=[],notes=[],miles=[],voices=[],recorder=null,chunks=[];
-const $=id=>document.getElementById(id);
-function go(id){
- document.querySelectorAll('main>section').forEach(s=>s.classList.add('hide'));
- $(id).classList.remove('hide');
- $('nav').classList.toggle('hide',['welcome','intro','auth'].includes(id));
- window.scrollTo(0,0);
- if(id==='chat')renderChat();
- if(id==='memories')renderPhotos();
- if(id==='letters')renderNotes();
- if(id==='story')renderMiles();
- if(id==='voice')renderVoices();
+const SUPABASE_URL = 'PASTE_PROJECT_URL_HERE';
+const SUPABASE_PUBLISHABLE_KEY = 'PASTE_PUBLISHABLE_KEY_HERE';
+
+const $ = id => document.getElementById(id);
+let db=null,currentUser=null,currentSpace=null,authMode='login',realtimeChannel=null;
+
+function setStatus(id,message){$(id).textContent=message||''}
+function showScreen(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+ if(id==='chat')loadMessages();
 }
-function mode(m){
- authMode=m;
- $('lt').classList.toggle('on',m==='login');
- $('rt').classList.toggle('on',m==='register');
- $('nf').classList.toggle('hide',m!=='register');
- $('cf').classList.toggle('hide',m!=='register');
- $('submit').textContent=m==='login'?'Log in':'Create account';
- $('authStatus').textContent='';
+function setupClient(){
+ if(!window.supabase){setStatus('authStatus','Could not load Supabase. Check your internet.');return false}
+ if(!SUPABASE_URL.startsWith('https://')||SUPABASE_PUBLISHABLE_KEY.startsWith('PASTE_')){
+  setStatus('authStatus','Add your Supabase Project URL and Publishable key first.');return false;
+ }
+ if(!db)db=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+ return true;
 }
-$('authForm').addEventListener('submit',e=>{
+function setAuthMode(mode){
+ authMode=mode;
+ $('loginTab').classList.toggle('active',mode==='login');
+ $('registerTab').classList.toggle('active',mode==='register');
+ $('nameWrap').classList.toggle('hidden',mode!=='register');
+ $('authSubmit').textContent=mode==='login'?'Log in':'Create account';
+ setStatus('authStatus','');
+}
+$('startBtn').onclick=()=>showScreen('auth');
+$('backWelcome').onclick=()=>showScreen('welcome');
+$('loginTab').onclick=()=>setAuthMode('login');
+$('registerTab').onclick=()=>setAuthMode('register');
+
+$('authForm').addEventListener('submit',async e=>{
  e.preventDefault();
- $('authStatus').textContent='This is the design preview: real account login is not connected yet. Use “Explore design preview” to test the screens.';
-});
-function demo(){
- demoUser=$('name').value.trim()||'Guest';
- $('hello').textContent=demoUser+', welcome ♡';
- $('profileText').textContent='Preview account: '+demoUser+' — no real login';
- $('headStatus').textContent='PREVIEW MODE';
- updateDays();go('home');
-}
-function logout(){go('welcome');$('headStatus').textContent='A LITTLE WORLD FOR TWO'}
-function updateDays(){
- let d=localStorage.getItem('mh_date'),n=$('days');
- if(!d){n.textContent='♡';$('today').textContent=new Date().toLocaleDateString();return}
- n.textContent=Math.max(0,Math.floor((Date.now()-new Date(d+'T00:00:00').getTime())/86400000)+1);
- $('today').textContent='Your story, one day at a time';
-}
-function send(){
- let t=$('msg').value.trim();if(!t)return;
- chat.push({text:t,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});
- $('msg').value='';renderChat();
- $('chatStatus').textContent='Preview only: this message is not shared with the other phone.';
-}
-function renderChat(){
- let b=$('chatList');b.replaceChildren();
- chat.forEach(m=>{
-  let d=document.createElement('div');d.className='bubble mine';
-  let s=document.createElement('small');s.textContent=demoUser+' · '+m.time;
-  d.append(s,document.createTextNode(m.text));b.append(d);
- });
-}
-function addPhoto(){
- let f=$('photo').files[0];
- if(!f){$('photoStatus').textContent='Choose a photo first.';return}
- if(!f.type.startsWith('image/')||f.size>5*1024*1024){$('photoStatus').textContent='Choose an image smaller than 5 MB.';return}
- let r=new FileReader();
- r.onload=()=>{
-  photos.unshift({url:r.result,caption:$('caption').value.trim()});
-  renderPhotos();$('photoStatus').textContent='Saved in this preview only, not shared to another phone.';
- };
- r.readAsDataURL(f);
-}
-function renderPhotos(){
- let b=$('photoGrid');b.replaceChildren();
- photos.forEach(p=>{
-  let d=document.createElement('div');d.className='photo';
-  let i=document.createElement('img');i.src=p.url;
-  let c=document.createElement('p');c.textContent=p.caption||'A little memory';
-  d.append(i,c);b.append(d);
- });
-}
-async function record(){
- if(recorder?.state==='recording'){recorder.stop();$('rec').textContent='● Start recording';return}
- if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){$('recStatus').textContent='Recording is not supported by this browser.';return}
+ if(!setupClient())return;
+ const email=$('email').value.trim(),password=$('password').value;
+ setStatus('authStatus','Please wait…');
  try{
-  let stream=await navigator.mediaDevices.getUserMedia({audio:true});chunks=[];
-  recorder=new MediaRecorder(stream);
-  recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
-  recorder.onstop=()=>{
-   let u=URL.createObjectURL(new Blob(chunks,{type:recorder.mimeType||'audio/webm'}));
-   voices.unshift({url:u,date:new Date().toLocaleString()});
-   stream.getTracks().forEach(t=>t.stop());renderVoices();
-   $('recStatus').textContent='Saved on this device only.';
-  };
-  recorder.start();$('rec').textContent='■ Stop recording';
-  $('recStatus').textContent='Recording… tap stop when finished.';
- }catch(e){$('recStatus').textContent='Allow microphone access to record.'}
+  let result;
+  if(authMode==='register'){
+   result=await db.auth.signUp({email,password,options:{data:{display_name:$('displayName').value.trim()||email.split('@')[0]}}});
+   if(result.error)throw result.error;
+   if(!result.data.session){setStatus('authStatus','Account created. Check your email to confirm it, then log in.');return}
+  }else{
+   result=await db.auth.signInWithPassword({email,password});
+   if(result.error)throw result.error;
+  }
+  currentUser=result.data.user;
+  await afterLogin();
+ }catch(err){setStatus('authStatus',err.message||'Sign-in failed.')}
+});
+
+async function afterLogin(){
+ if(!db||!currentUser)return;
+ setStatus('spaceStatus','Checking your private space…');
+ try{
+  const membership=await db.from('space_members').select('space_id').eq('user_id',currentUser.id).maybeSingle();
+  if(membership.error)throw membership.error;
+  if(membership.data){
+   const result=await db.from('spaces').select('id,name,invite_code').eq('id',membership.data.space_id).single();
+   if(result.error)throw result.error;
+   currentSpace=result.data;
+   enterHome();
+  }else showScreen('space');
+ }catch(err){showScreen('space');setStatus('spaceStatus','Could not load your space: '+err.message)}
 }
-function renderVoices(){
- let b=$('voiceList');b.replaceChildren();
- voices.forEach(v=>{
-  let d=document.createElement('div');d.className='note';
-  let p=document.createElement('p');p.className='small';p.textContent=v.date;
-  let a=document.createElement('audio');a.controls=true;a.src=v.url;a.style.width='100%';
-  d.append(p,a);b.append(d);
+
+async function createSpace(){
+ if(!currentUser||!setupClient())return;
+ setStatus('spaceStatus','Creating your private space…');
+ try{
+  const {data,error}=await db.rpc('create_private_space',{space_name:$('spaceName').value.trim()||'M & H Soulmates'});
+  if(error)throw error;
+  currentSpace=Array.isArray(data)?data[0]:data;
+  if(!currentSpace||!currentSpace.id)throw new Error('The create function returned no space. Check the Supabase function.');
+  enterHome();
+ }catch(err){setStatus('spaceStatus',err.message||'Could not create the space.')}
+}
+
+async function joinSpace(){
+ if(!currentUser||!setupClient())return;
+ const code=$('inviteCode').value.trim();
+ if(!code){setStatus('spaceStatus','Enter the invitation code first.');return}
+ setStatus('spaceStatus','Checking invitation code…');
+ try{
+  const {data,error}=await db.rpc('join_private_space',{invite_code_input:code});
+  if(error)throw error;
+  currentSpace=Array.isArray(data)?data[0]:data;
+  if(!currentSpace||!currentSpace.id)throw new Error('The join function returned no space. Check the Supabase function.');
+  enterHome();
+ }catch(err){setStatus('spaceStatus',err.message||'Could not join this space.')}
+}
+
+function enterHome(){
+ $('headStatus').textContent='PRIVATE SPACE';
+ $('welcomeText').textContent='Welcome, '+(currentUser.user_metadata?.display_name||currentUser.email||'friend')+'. This is your shared space.';
+ $('inviteDisplay').textContent=currentSpace?.invite_code||'Invitation code unavailable';
+ showScreen('home');
+ startRealtime();
+ loadMessages();
+}
+
+$('createBtn').onclick=createSpace;
+$('joinBtn').onclick=joinSpace;
+
+$('copyCode').onclick=async()=>{
+ const code=currentSpace?.invite_code;
+ if(!code)return;
+ try{await navigator.clipboard.writeText(code);setStatus('spaceStatus','Invitation code copied.')}
+ catch{setStatus('spaceStatus','Select and copy the invitation code manually.')}
+};
+
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showScreen(b.dataset.go)));
+
+async function loadMessages(){
+ if(!db||!currentSpace||!currentUser)return;
+ const {data,error}=await db.from('messages').select('id,user_id,content,created_at').eq('space_id',currentSpace.id).order('created_at',{ascending:true}).limit(150);
+ if(error){setStatus('chatStatus',error.message);return}
+ renderMessages(data||[]);
+}
+function renderMessages(items){
+ const box=$('messages');
+ box.replaceChildren();
+ items.forEach(m=>{
+  const bubble=document.createElement('div');
+  bubble.className='bubble'+(m.user_id===currentUser?.id?' mine':'');
+  const meta=document.createElement('small');
+  meta.textContent=(m.user_id===currentUser?.id?'You':'Partner')+' · '+new Date(m.created_at).toLocaleString();
+  bubble.append(meta,document.createTextNode(m.content));
+  box.append(bubble);
  });
+ box.scrollTop=box.scrollHeight;
 }
-function saveDate(){
- let d=$('date').value;if(!d){$('dateStatus').textContent='Choose a date first.';return}
- localStorage.setItem('mh_date',d);updateDays();$('dateStatus').textContent='Saved on this device only.';
+
+$('messageForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const content=$('messageInput').value.trim();
+ if(!content||!db||!currentSpace||!currentUser)return;
+ setStatus('chatStatus','Sending…');
+ const {error}=await db.from('messages').insert({space_id:currentSpace.id,user_id:currentUser.id,content});
+ if(error){setStatus('chatStatus',error.message);return}
+ $('messageInput').value='';
+ setStatus('chatStatus','');
+ await loadMessages();
+});
+
+function startRealtime(){
+ if(!db||!currentSpace)return;
+ if(realtimeChannel)db.removeChannel(realtimeChannel);
+ realtimeChannel=db.channel('mh-chat-'+currentSpace.id)
+ .on('postgres_changes',{event:'INSERT',schema:'public',table:'messages',filter:'space_id=eq.'+currentSpace.id},()=>loadMessages())
+ .subscribe();
 }
-function addMilestone(){
- let t=$('milestone').value.trim(),d=$('mileDate').value;if(!t||!d)return;
- miles.unshift({t,d});$('milestone').value='';renderMiles();
+
+async function logout(){
+ if(realtimeChannel&&db){await db.removeChannel(realtimeChannel);realtimeChannel=null}
+ if(db)await db.auth.signOut();
+ currentUser=null;
+ currentSpace=null;
+ $('headStatus').textContent='PRIVATE SPACE';
+ showScreen('welcome');
 }
-function renderMiles(){
- let b=$('mileList');b.replaceChildren();
- miles.forEach(m=>{
-  let d=$('milestone').ownerDocument.createElement('div');d.className='note';
-  let s=document.createElement('strong');s.style.color='var(--gl)';s.textContent=m.t;
-  let p=document.createElement('p');p.className='small';p.textContent=m.d;
-  d.append(s,p);b.append(d);
- });
-}
-function addNote(){
- let t=$('ntitle').value.trim(),x=$('ntext').value.trim(),d=$('ndate').value;
- if(!t||!x)return;
- notes.unshift({t,x,d});$('ntitle').value='';$('ntext').value='';$('ndate').value='';renderNotes();
-}
-function renderNotes(){
- let b=$('noteList');b.replaceChildren();
- notes.forEach(n=>{
-  let d=document.createElement('div');d.className='note';
-  let h=document.createElement('strong');h.style.color='var(--gl)';h.textContent=n.t;
-  let p=document.createElement('p');p.style.whiteSpace='pre-wrap';p.textContent=n.x;
-  let s=document.createElement('p');s.className='small';s.textContent=n.d?'Open on '+n.d:'Saved note';
-  d.append(h,p,s);b.append(d);
- });
-}
+$('logoutFromSpace').onclick=logout;
+$('logoutHome').onclick=logout;
+
+(async function restoreSession(){
+ if(!setupClient())return;
+ try{
+  const {data,error}=await db.auth.getSession();
+  if(error)throw error;
+  if(data.session){currentUser=data.session.user;await afterLogin()}
+  db.auth.onAuthStateChange((_event,session)=>{
+   if(session&&!currentUser){currentUser=session.user;setTimeout(()=>afterLogin(),0)}
+  });
+ }catch(err){setStatus('authStatus',err.message||'Could not restore session.')}
+})();
 </script>
 </body>
 </html>
